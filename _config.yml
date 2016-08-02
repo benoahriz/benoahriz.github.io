@@ -94,6 +94,7 @@ theme: clean-blog
 deploy:
   type: git
   repo: git@github.com:benoahriz/benoahriz.github.io.git
+  branch: master
 
 #markdown settings
 marked:
