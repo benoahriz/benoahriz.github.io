@@ -19,6 +19,7 @@ menu:
     icon: github
 index_cover: http://benoahriz.github.io/images/home-bg2.png
 menu_title: TheBrainVault
+menu_title_cover: http://benoahriz.github.io/images/brainvault_small.png
 # Social Accounts
 twitter_url: https://twitter.com/benoahriz
 twitter_handle: benoahriz
@@ -91,10 +92,11 @@ theme: clean-blog
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
-  type: git
-  repo: git@github.com:benoahriz/benoahriz.github.io.git
-  branch: master
+# dont use the plugin cause it sucks
+# deploy:
+#   type: git
+#   repo: git@github.com:benoahriz/benoahriz.github.io.git
+#   branch: master
 
 #markdown settings
 marked:
