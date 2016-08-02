@@ -1,6 +1,6 @@
 ---
 title: BASH tricks
-date: 2016-08-02 14:11:47
+date: 2016-07-02 14:11:47
 tags:
 ---
 
