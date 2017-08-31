@@ -18,14 +18,14 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="TheBrainVault"/>
+        <meta property="og:title" content="BrainVault"/>
     
 
     <!--Open Graph Description-->
     
 
     <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="TheBrainVault"/>
+    <meta property="og:site_name" content="BrainVault"/>
 
     <!--Type page-->
     
@@ -42,7 +42,7 @@
 
     <!-- Title -->
     
-    <title>TheBrainVault</title>
+    <title>BrainVault</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -86,7 +86,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="background-image: url('images/brainvault_small.png'); width: 300px; height: 92px;" href="/"> </a>
+            <a class="navbar-brand" style="background-image: url('http://benoahriz.github.io/images/brainvault_small.png'); width: 300px; height: 92px;" href="/"> TheBrainVault</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -132,7 +132,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>TheBrainVault</h1>
+                    <h1>BrainVault</h1>
                     <hr class="small">
                     <span class="subheading"></span>
                 </div>
@@ -147,7 +147,40 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             
                 <div class="post-preview">
-    <a href="/2016/07/24/serverless-docker/">
+    <a href="/2017/08/23/TDD-with-test-kitchen-and-chef-or-ansible/">
+        <h2 class="post-title">
+            TDD with test-kitchen and chef or ansible
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2017-08-23
+    </p>
+</div>
+<hr>
+                
+            
+                <div class="post-preview">
+    <a href="/2017/08/23/The-Pancake-Stack/">
+        <h2 class="post-title">
+            The Pancake Stack
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2017-08-23
+    </p>
+</div>
+<hr>
+                The Pancake StackAt Nitro we’ve tried to embrace the idea that simple systems are key to scalable and efficient infrastructure and micro-services and help maximize innovation, velocity and trust.
+If you haven’t heard this talk by Rich Hickey please take the time to watch this talk. The points mad...
+            
+                <div class="post-preview">
+    <a href="/2016/07/24/Serverless-Docker/">
         <h2 class="post-title">
             serverless docker
         </h2>
@@ -164,9 +197,9 @@
 This brings back the concept of cgi.  Further on the idea o...
             
                 <div class="post-preview">
-    <a href="/2016/07/20/apt-cacher-ng-docker-builds/">
+    <a href="/2016/07/20/apt-cacher-ng-with-docker-builds/">
         <h2 class="post-title">
-            apt-cacher-ng docker builds
+            apt-cacher-ng with docker builds
         </h2>
         
     </a>
@@ -177,13 +210,13 @@ This brings back the concept of cgi.  Further on the idea o...
     </p>
 </div>
 <hr>
-                apt-cacher-ng with docker buildsWorking with docker on a laptop testing configuration of containers has some of the same annoyances as working with other configuration managment tools and testing frameworks like test-kitchen, chef, ansible etc… 
-It takes forever to download dependencies.  I might...
+                apt-cacher-ng with docker buildsWorking with docker on a laptop testing configuration of containers has some of the same annoyances as working with other configuration managment tools and testing frameworks like test-kitchen, chef, ansible etc…
+It takes forever to download dependencies. I might t...
             
                 <div class="post-preview">
-    <a href="/2016/07/18/Docker-hacks/">
+    <a href="/2016/07/18/Docker-Hacks/">
         <h2 class="post-title">
-            Docker hacks
+            Docker Hacks
         </h2>
         
     </a>
@@ -194,55 +227,14 @@ It takes forever to download dependencies.  I might...
     </p>
 </div>
 <hr>
-                Docker HacksWhen you need to restart the docker daemon and want to resume currently running containers.1234docker ps |tail -n +2 &gt; /docker.runningcat /docker.runningservice docker restartdocker start $(awk '&#123;print $1&#125;' /docker.running)
+                I’ve found this snippet handy when you need to restart the docker daemon and want to resume currently running containers.
+1234docker ps |tail -n +2 &gt; /docker.runningcat /docker.runningservice docker restartdocker start $(awk '&#123;print $1&#125;' /docker.running)
 
             
                 <div class="post-preview">
-    <a href="/2016/07/16/BASH-tricks/">
+    <a href="/2016/07/15/Using-Ansible-to-communicate-with-rest-API/">
         <h2 class="post-title">
-            BASH tricks
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2016-07-16
-    </p>
-</div>
-<hr>
-                Just a bunch of bash tricks i’ve picked up.Save a backup copy of a file with a datestamp.
-1cp script.sh script.sh.$(date +%Y%m%d%H%M)
-Generate a random string maybe for api key or password.
-1cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
-Find empty directories.
-1fin...
-            
-                <div class="post-preview">
-    <a href="/2016/07/16/Notes-on-cloudflare-api/">
-        <h2 class="post-title">
-            Notes on cloudflare api and Jq
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2016-07-16
-    </p>
-</div>
-<hr>
-                Notes on cloudflare api and JqJq is a great tool Link . It makes working with json from rest api’s much easier and easier to read. See the examples page for more info but here is a short one.
-Prerequisites for examples
-setup a cloudflare api token
-install jq brew install jq if your on osx.
-
-1234c...
-            
-                <div class="post-preview">
-    <a href="/2016/07/15/Ansible-to-interact-with-a-rest-api/">
-        <h2 class="post-title">
-            Ansible to interact with a rest API
+            Using Ansible to communicate with rest API
         </h2>
         
     </a>
@@ -253,12 +245,12 @@ install jq brew install jq if your on osx.
     </p>
 </div>
 <hr>
-                Ansible to interact with a rest APISometimes you may want to interact with a rest api where an Ansible module doesn’t already exist.  For those cases you may want to try using the uri module.  Ansible already supports interacting with json so its pretty easy.  Below I show an example of interacti...
+                Ansible to interact with a rest APISometimes you may want to interact with a rest api where an Ansible module doesn’t already exist. For those cases you may want to try using the uri module. Ansible already supports interacting with json so its pretty easy. Below I show an example of interacting ...
             
                 <div class="post-preview">
-    <a href="/2016/07/14/directory-usage-tricks/">
+    <a href="/2016/07/14/Tricks-for-finding-directory-space-usage/">
         <h2 class="post-title">
-            Directory usage tricks
+            Tricks for finding directory space usage.
         </h2>
         
     </a>
@@ -269,28 +261,10 @@ install jq brew install jq if your on osx.
     </p>
 </div>
 <hr>
-                Tricks for finding directory space usage.This is an example of using find and awk to get the total space used for files matching a pattern.
-1find . -iname "*regex" -printf "%s\n" | awk '&#123;f+=$1&#125;END&#123;print f/(1024 *1024 * 1024),"GB"&#125;'
-1find . -iname "*.regex" -printf "%s\n" | awk...
-            
-                <div class="post-preview">
-    <a href="/2016/07/13/smp-affinity-makes-a-difference/">
-        <h2 class="post-title">
-            smp affinity makes a difference
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2016-07-13
-    </p>
-</div>
-<hr>
-                A good Driver.Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.
-For example having the stock 2.6.32-220 megasas driver only makes use of one interrupt.
-This was the stock driver in the centos 2.6.32-220 kernel
-...
+                Tricks for finding directory space usage.1find . -iname "*regex" -printf "%s\n" | awk '&#123;f+=$1&#125;END&#123;print f/(1024 *1024 * 1024),"GB"&#125;'
+1find . -iname "*.regex" -printf "%s\n" | awk '&#123;f+=$1&#125;END&#123;print f&#125;'
+another way.
+1find -name \*.regex  -print0 | du -ch --fi...
             
                 <div class="post-preview">
     <a href="/2016/07/13/Infiniband-performance-tuning/">
@@ -307,6 +281,46 @@ This was the stock driver in the centos 2.6.32-220 kernel
 </div>
 <hr>
                 I don’t currently have access to the original hardware I used so most of this is off memory and some notes I made.Also I’ll present the caveat and warning that all these things I tested not with a view to stability for a production environment but this allowed me to get an Idea of what things I c...
+            
+                <div class="post-preview">
+    <a href="/2016/07/13/smp-affinity-makes-a-difference/">
+        <h2 class="post-title">
+            smp affinity makes a difference
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2016-07-13
+    </p>
+</div>
+<hr>
+                A good driver.Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.
+For example having the stock 2.6.32-220 megasas driver only makes use of one interrupt.
+This was the stock driver in the centos 2.6.32-220 kernel
+...
+            
+                <div class="post-preview">
+    <a href="/2016/07/02/BASH-tricks/">
+        <h2 class="post-title">
+            BASH tricks
+        </h2>
+        
+    </a>
+    <p class="post-meta">
+        <!-- Date and Author -->
+        
+        2016-07-02
+    </p>
+</div>
+<hr>
+                Just a bunch of bash tricks i’ve picked up.Save a backup copy of a file with a datestamp.
+1cp script.sh script.sh.$(date +%Y%m%d%H%M)
+Generate a random string maybe for api key or password.
+1cat /dev/urandom | env LC_CTYPE=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+Find empty directories.
+1fin...
             
             <ul class="pager">
     

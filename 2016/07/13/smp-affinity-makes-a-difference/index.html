@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="A good Driver.Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.">
+        <meta name="description" content="A good driver.Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.">
     
 
     <!--Author-->
@@ -27,7 +27,7 @@
     
 
     <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="TheBrainVault"/>
+    <meta property="og:site_name" content="BrainVault"/>
 
     <!--Type page-->
     
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>smp affinity makes a difference - TheBrainVault</title>
+    <title>smp affinity makes a difference - BrainVault</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -88,7 +88,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="background-image: url('images/brainvault_small.png'); width: 300px; height: 92px;" href="/"> </a>
+            <a class="navbar-brand" style="background-image: url('http://benoahriz.github.io/images/brainvault_small.png'); width: 300px; height: 92px;" href="/"> TheBrainVault</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -161,11 +161,11 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="A-good-Driver"><a href="#A-good-Driver" class="headerlink" title="A good Driver."></a>A good Driver.</h2><p>Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.</p>
+                <h1 id="A-good-driver"><a href="#A-good-driver" class="headerlink" title="A good driver."></a>A good driver.</h1><p>Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.</p>
 <p>For example having the stock 2.6.32-220 megasas driver only makes use of one interrupt.</p>
 <p>This was the stock driver in the centos 2.6.32-220 kernel</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@demo mnt]<span class="comment"># cat /proc/interrupts |grep megasas</span></div><div class="line">  79:       2506          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div></pre></td></tr></table></figure>
-<p>This was the driver from LSI compiled against the same kernel.</p>
+<p>This is the driver from LSI compiled against the same kernel sources. Notice the additional interrupt usage.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@demo mnt]<span class="comment"># cat /proc/interrupts |grep megasas</span></div><div class="line">  80:       2506          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  81:        124          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  82:         24          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  83:          7          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  84:        993          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  85:         80          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  86:         17          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div><div class="line">  87:          8          0          0          0          0          0          0          0  IR-PCI-MSI-edge      megasas</div></pre></td></tr></table></figure>
 
 
