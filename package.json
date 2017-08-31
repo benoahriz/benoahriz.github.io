@@ -6,6 +6,7 @@
     "version": "3.2.2"
   },
   "dependencies": {
+    "bunyan": "^1.8.12",
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.2.0",
     "hexo-generator-archive": "^0.1.4",
