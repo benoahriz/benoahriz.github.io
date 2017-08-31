@@ -91,12 +91,7 @@ pagination_dir: page
 theme: clean-blog
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
 # dont use the plugin cause it sucks
-# deploy:
-#   type: git
-#   repo: git@github.com:benoahriz/benoahriz.github.io.git
-#   branch: master
 
 #markdown settings
 marked:
