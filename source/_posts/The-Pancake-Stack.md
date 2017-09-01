@@ -64,6 +64,9 @@ Zookeeper allows mesos to keep track of state across the resources.
 
 We use AWS Ec2 because it has a mature API and allows us to scale infrastructure costs as needed.  We developed an internal tool called Proviso.  We use Proviso to manage our EC2 instances clusters. It stores the cluster state in Etcd, so we can reliably query, provision and decommission instances.  Once a new instance has been provisioned, we use Ansible to run the bootstrap template. This template installs the mandatory packages and sets up the tooling required to monitor the new instance and to register it in the Mesos cluster.  The bootstrap just installs the bare minimum needed tools to get monitoring in place and mesos agent running on the machine. 
 
+![Pancake Stack Diagram](https://brainvault.xyz/images/pancake-stack.png "Pancake Stack")
+
+
 Special shout-outs to:
 
 Ben Parli [https://github.com/bparli](https://github.com/bparli)
