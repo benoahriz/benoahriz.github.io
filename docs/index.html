@@ -97,10 +97,6 @@
                     </li>
                     
                         
-                        <li>
-                            <a href="/categories/tech">tech</a>
-                        </li>
-                        
                     
                     
 		    
@@ -210,34 +206,6 @@
 <hr>
 
 <div class="post-preview">
-    <a href="https://brainvault.xyz/post/photogallery/">
-        <h2 class="post-title">
-            An Example Post
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            404 bg
-      Contact bg
-      Disqus
-      Favicon
-      Fullscreenshot
-      Home bg jeep
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by      &#34;&#34; on Monday, June 4, 2018
-        
-        
-    
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
     <a href="https://brainvault.xyz/post/the-pancake-stack/">
         <h2 class="post-title">
             The Pancake Stack
@@ -302,6 +270,30 @@ It takes forever to download dependencies. I might test some infrastructure code
     <p class="post-meta">
     
         Posted by      &#34;Benjamin Rizkowsky&#34; on Wednesday, July 20, 2016
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+    <a href="https://brainvault.xyz/post/docker-hacks/">
+        <h2 class="post-title">
+            Docker Hacks
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            I&rsquo;ve found this snippet handy when you need to restart the docker daemon and want to resume currently running containers.
+docker ps |tail -n +2 &gt; /docker.running cat /docker.running service docker restart docker start $(awk &#39;{print $1}&#39; /docker.running) 
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by      &#34;Benjamin Rizkowsky&#34; on Monday, July 18, 2016
         
         
     
@@ -466,10 +458,6 @@ It takes forever to download dependencies. I might test some infrastructure code
                     <a href="/tags/dockerfile" title="dockerfile">
                         dockerfile
                     </a>
-               
-            
-               
-            
                
             
                

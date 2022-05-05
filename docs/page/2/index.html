@@ -97,10 +97,6 @@
                     </li>
                     
                         
-                        <li>
-                            <a href="/categories/tech">tech</a>
-                        </li>
-                        
                     
                     
 		    
@@ -185,30 +181,6 @@
             post-container
         ">
             
-
-<div class="post-preview">
-    <a href="https://brainvault.xyz/post/docker-hacks/">
-        <h2 class="post-title">
-            Docker Hacks
-        </h2>
-	
-        <div class="post-content-preview">
-	
-            I&rsquo;ve found this snippet handy when you need to restart the docker daemon and want to resume currently running containers.
-docker ps |tail -n +2 &gt; /docker.running cat /docker.running service docker restart docker start $(awk &#39;{print $1}&#39; /docker.running) 
-       
-        </div>
-    </a>
-    <p class="post-meta">
-    
-        Posted by      &#34;Benjamin Rizkowsky&#34; on Monday, July 18, 2016
-        
-        
-    
-    </p>
-
-</div>
-<hr>
 
 <div class="post-preview">
     <a href="https://brainvault.xyz/post/using-ansible-to-communicate-with-rest-api/">
@@ -309,6 +281,32 @@ This was the stock driver in the centos 2.6.32-220 kernel
 </div>
 <hr>
 
+<div class="post-preview">
+    <a href="https://brainvault.xyz/post/bash-tricks/">
+        <h2 class="post-title">
+            BASH tricks
+        </h2>
+	
+        <div class="post-content-preview">
+	
+            Just a bunch of bash tricks i’ve picked up. Save a backup copy of a file with a datestamp.
+cp script.sh script.sh.$(date +%Y%m%d%H%M) Generate a random string maybe for api key or password.
+cat /dev/urandom | env LC_CTYPE=C tr -dc &#39;a-zA-Z0-9&#39; | fold -w 32 | head -n 1 Find empty directories.
+find . -mindepth 1 -maxdepth 1 -type d -empty List processes being used by remote terminals and then show the files that may be opened by them.
+       
+        </div>
+    </a>
+    <p class="post-meta">
+    
+        Posted by      &#34;Benjamin Rizkowsky&#34; on Saturday, July 2, 2016
+        
+        
+    
+    </p>
+
+</div>
+<hr>
+
 
             
 
@@ -319,10 +317,6 @@ This was the stock driver in the centos 2.6.32-220 kernel
         <a href="/">&larr; Newer Posts</a>
     </li>
     
-    
-    <li class="next">
-        <a href="/page/3/">Older Posts &rarr;</a>
-    </li>
     
 </ul>
 
@@ -469,10 +463,6 @@ This was the stock driver in the centos 2.6.32-220 kernel
                     <a href="/tags/dockerfile" title="dockerfile">
                         dockerfile
                     </a>
-               
-            
-               
-            
                
             
                

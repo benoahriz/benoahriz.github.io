@@ -42,31 +42,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>
-    <loc>https://brainvault.xyz/post/photogallery/</loc>
-    <lastmod>2018-06-04T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://brainvault.xyz/categories/</loc>
-    <lastmod>2018-06-04T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://brainvault.xyz/tags/tag1/</loc>
-    <lastmod>2018-06-04T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://brainvault.xyz/tags/tag2/</loc>
-    <lastmod>2018-06-04T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
-    <loc>https://brainvault.xyz/categories/tech/</loc>
-    <lastmod>2018-06-04T00:00:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url><url>
     <loc>https://brainvault.xyz/post/the-pancake-stack/</loc>
     <lastmod>2017-08-23T10:19:52+00:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -201,6 +176,10 @@
     <priority>0.5</priority>
   </url><url>
     <loc>https://brainvault.xyz/top/books/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url><url>
+    <loc>https://brainvault.xyz/categories/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url><url>

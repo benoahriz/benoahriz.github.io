@@ -27,6 +27,7 @@ outputs:
     - HTML
     - RSS
     - Algolia
+publishDir: docs
 params:
   header_image: 'images/home-bg2.png'
   author: Benjamin Rizkowsky
