@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="The Brain Vault">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://brainvault.xyz/images/home-bg2.png">
+    <meta property="twitter:image" content="https://brainvault.xyz/images/home-bg2.png" />
+    
+
+    
+    <meta name="title" content="Using Ansible to communicate with rest API" />
+    <meta property="og:title" content="Using Ansible to communicate with rest API" />
+    <meta property="twitter:title" content="Using Ansible to communicate with rest API" />
+    
+
+    
+    <meta name="description" content="A place to store things.  The brain vault.">
+    <meta property="og:description" content="A place to store things.  The brain vault." />
+    <meta property="twitter:description" content="A place to store things.  The brain vault." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Using Ansible to communicate with rest API | brain vault Blog</title>
+
+    <link rel="canonical" href="/post/using-ansible-to-communicate-with-rest-api/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">The Brain Vault</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/photography">Photography</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/images/home-bg2.png')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Using Ansible to communicate with rest API</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;Benjamin Rizkowsky&#34;
+                             
+                            on 
+                            Friday, July 15, 2016
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="ansible-to-interact-with-a-rest-api">Ansible to interact with a rest API</h1>
+<p>Sometimes you may want to interact with a rest api where an Ansible module doesn’t already exist. For those cases you may want to try using the uri module. Ansible already supports interacting with json so its pretty easy. Below I show an example of interacting with the Vault api. Link</p>
+<p>You may want to use Vault in cases where there is more sensitive information that you need to ensure that it is encrypted as well as has an audit trail. Vault provides these things and they are fairly easy to setup.</p>
+<p>This example assumes you have setup a few things first.</p>
+<p>Things you need with links to the instructions.</p>
+<ol>
+<li>
+<p><a href="https://github.com/blog/1509-personal-api-tokens">Github account with a personal access token</a></p>
+</li>
+<li>
+<p>make sure you export the token to your environment variables or hardcode it. In this example I use the lookup Ansible plugin to look up the GITHUB_TOKEN env var. <code>export GITHUB_TOKEN=xxxxxxxxxxxx</code></p>
+</li>
+<li>
+<p><a href="https://www.vaultproject.io/docs/auth/github.html">Vault setup to use Github as an authentication back end.</a></p>
+</li>
+</ol>
+<p>Here we check out a Vault token using our github token.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span>- name: ansible examples
+</span></span><span style="display:flex;"><span>  hosts: localhost
+</span></span><span style="display:flex;"><span>  vars:
+</span></span><span style="display:flex;"><span>    github_token: <span style="color:#f1fa8c">&#34;{{ lookup(&#39;env&#39;,&#39;GITHUB_TOKEN&#39;) }}&#34;</span>
+</span></span><span style="display:flex;"><span>    home_directory: <span style="color:#f1fa8c">&#34;{{ lookup(&#39;env&#39;,&#39;HOME&#39;) }}&#34;</span>
+</span></span><span style="display:flex;"><span>    user: <span style="color:#f1fa8c">&#34;{{ lookup(&#39;env&#39;,&#39;USER&#39;) }}&#34;</span>
+</span></span><span style="display:flex;"><span>  tasks:
+</span></span><span style="display:flex;"><span>    - name: get vault token
+</span></span><span style="display:flex;"><span>      uri:
+</span></span><span style="display:flex;"><span>        url: <span style="color:#f1fa8c">&#34;https://myvault.com:8200/v1/auth/github/login&#34;</span>
+</span></span><span style="display:flex;"><span>        method: POST
+</span></span><span style="display:flex;"><span>        validate_certs: no
+</span></span><span style="display:flex;"><span>        follow_redirects: all
+</span></span><span style="display:flex;"><span>        body:
+</span></span><span style="display:flex;"><span>          token: <span style="color:#f1fa8c">&#34;{{ github_token }}&#34;</span>
+</span></span><span style="display:flex;"><span>        return_content: yes
+</span></span><span style="display:flex;"><span>        body_format: json
+</span></span><span style="display:flex;"><span>      register: token_output
+</span></span><span style="display:flex;"><span>      delegate_to: 127.0.0.1
+</span></span><span style="display:flex;"><span>    - debug: <span style="color:#8be9fd;font-style:italic">var</span><span style="color:#ff79c6">=</span>token_output.json.auth.client_token
+</span></span></code></pre></div><p>Now that we have a Vault token we can write values to the keystore. Notice how you can embed json directly into the yaml :)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#6272a4">#     vault returns a 204 on success not 200</span>
+</span></span><span style="display:flex;"><span>    - name: use token to update a secret
+</span></span><span style="display:flex;"><span>      uri:
+</span></span><span style="display:flex;"><span>        url: <span style="color:#f1fa8c">&#34;https://myvault.com:8200/v1/envs/ansible_examples&#34;</span>
+</span></span><span style="display:flex;"><span>        method: POST
+</span></span><span style="display:flex;"><span>        validate_certs: no
+</span></span><span style="display:flex;"><span>        follow_redirects: all
+</span></span><span style="display:flex;"><span>        HEADER_X-Vault-Token: <span style="color:#f1fa8c">&#34;{{ token_output.json.auth.client_token }}&#34;</span>
+</span></span><span style="display:flex;"><span>        body: <span style="color:#f1fa8c">&#34;{
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">                &#39;{{ user }}&#39;: &#39;{{ home_directory }}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">              }&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#        body:</span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">#          user: &#34;{{ home_directory }}&#34;</span>
+</span></span><span style="display:flex;"><span>        return_content: yes
+</span></span><span style="display:flex;"><span>        body_format: json
+</span></span><span style="display:flex;"><span>        status_code: <span style="color:#bd93f9">204</span>
+</span></span><span style="display:flex;"><span>      register: add_secret
+</span></span><span style="display:flex;"><span>      delegate_to: 127.0.0.1
+</span></span><span style="display:flex;"><span>    - debug: <span style="color:#8be9fd;font-style:italic">var</span><span style="color:#ff79c6">=</span>add_secret
+</span></span></code></pre></div><p>Here we can read back the encrypted key from the vault.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- name: use token to <span style="color:#8be9fd;font-style:italic">read</span> a secret
+</span></span><span style="display:flex;"><span>  uri:
+</span></span><span style="display:flex;"><span>    url: <span style="color:#f1fa8c">&#34;https://myvault.com:8200/v1/envs/ansible_examples&#34;</span>
+</span></span><span style="display:flex;"><span>    method: GET
+</span></span><span style="display:flex;"><span>    validate_certs: no
+</span></span><span style="display:flex;"><span>    follow_redirects: all
+</span></span><span style="display:flex;"><span>    HEADER_X-Vault-Token: <span style="color:#f1fa8c">&#34;{{ token_output.json.auth.client_token }}&#34;</span>
+</span></span><span style="display:flex;"><span>    return_content: yes
+</span></span><span style="display:flex;"><span>    body_format: json
+</span></span><span style="display:flex;"><span>  register: read_secret
+</span></span><span style="display:flex;"><span>  delegate_to: 127.0.0.1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- debug: <span style="color:#8be9fd;font-style:italic">var</span><span style="color:#ff79c6">=</span>read_secret
+</span></span><span style="display:flex;"><span>- debug: <span style="color:#f1fa8c">&#34;var=read_secret.json.data.{{ user }}&#34;</span>
+</span></span></code></pre></div>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/tricks-for-finding-directory-space-usage/" data-toggle="tooltip" data-placement="top" title="Tricks for finding directory space usage.">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/docker-hacks/" data-toggle="tooltip" data-placement="top" title="Docker Hacks">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+<div id="disqus-comment"></div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "thebrainvaultorg" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/apt-cacher-ng" title="apt-cacher-ng">
+                            apt-cacher-ng
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/apt-get" title="apt-get">
+                            apt-get
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/configuration" title="configuration">
+                            configuration
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker-for-mac" title="docker-for-mac">
+                            docker-for-mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dockerfile" title="dockerfile">
+                            dockerfile
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://github.com/bparli">Ben Parli</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/relistan">Karl Matthias</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/mihaitodor">Mihai Todor</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:benoahriz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    <li>
+                        <a href="https://twitter.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/benjaminrizkowsky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="The Brain Vault" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; The Brain Vault 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

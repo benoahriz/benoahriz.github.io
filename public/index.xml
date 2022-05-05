@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Brain Vault</title>
+    <link>https://brainvault.xyz/</link>
+    <description>Recent content on The Brain Vault</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://brainvault.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resilient scalable build systems</title>
+      <link>https://brainvault.xyz/post/jenkins-eks-presentation/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/jenkins-eks-presentation/</guid>
+      <description>Slides from presentation  </description>
+    </item>
+    
+    <item>
+      <title>An Example Post</title>
+      <link>https://brainvault.xyz/post/photogallery/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/photogallery/</guid>
+      <description>404 bg
+      Contact bg
+      Disqus
+      Favicon
+      Fullscreenshot
+      Home bg jeep</description>
+    </item>
+    
+    <item>
+      <title>The Pancake Stack</title>
+      <link>https://brainvault.xyz/post/the-pancake-stack/</link>
+      <pubDate>Wed, 23 Aug 2017 10:19:52 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/the-pancake-stack/</guid>
+      <description>The Pancake Stack At Nitro, we have tried to embrace the idea that simple systems are key to scalable and efficient infrastructure and micro-services and help maximize innovation, velocity, and trust.
+If you have not heard this talk by Rich Hickey, please take the time to watch this talk. The points made are invaluable for systems and software development. &amp;ldquo;Simple&amp;rdquo; is the opposite of &amp;ldquo;complex,&amp;rdquo; which means &amp;ldquo;being intertwined&amp;rdquo; or &amp;ldquo;being tied together.</description>
+    </item>
+    
+    <item>
+      <title>Photography and Astrophotography</title>
+      <link>https://brainvault.xyz/top/photography/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/top/photography/</guid>
+      <description>Samples </description>
+    </item>
+    
+    <item>
+      <title>Server...less docker</title>
+      <link>https://brainvault.xyz/post/serverless-docker/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/serverless-docker/</guid>
+      <description>Server&amp;hellip;less Docker&amp;hellip; or stream processing with docker using golang. At Dockercon I saw a &amp;lsquo;cool hack&amp;rsquo; they called server-less docker. Basically the idea is to use containers as functions in programs instead of using containers as servers.
+This brings back the concept of cgi. Further on the idea of server-less docker is to create a program and inside the program functions call out to containers to do the work.
+Instead of needing to maintain a huge cluster of servers for a particular purpose you can have raw compute available as a swarm cluster and just utilize it as necessary for whatever computation you need.</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>https://brainvault.xyz/top/about/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/top/about/</guid>
+      <description>Some information Some information about myself should go here.</description>
+    </item>
+    
+    <item>
+      <title>Speeding up Docker builds</title>
+      <link>https://brainvault.xyz/post/apt-cacher-ng-with-docker-builds/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/apt-cacher-ng-with-docker-builds/</guid>
+      <description>apt-cacher-ng with docker builds Working with docker on a laptop testing configuration of containers has some of the same annoyances as working with other configuration managment tools and testing frameworks like test-kitchen, chef, ansible etc…
+It takes forever to download dependencies. I might test some infrastructure code using vagrant or test-kitchen many many times a day and it sucks having to download apt packages from mirrors that time out or get bogged down randomly.</description>
+    </item>
+    
+    <item>
+      <title>Docker Hacks</title>
+      <link>https://brainvault.xyz/post/docker-hacks/</link>
+      <pubDate>Mon, 18 Jul 2016 14:09:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/docker-hacks/</guid>
+      <description>I&amp;rsquo;ve found this snippet handy when you need to restart the docker daemon and want to resume currently running containers.
+docker ps |tail -n +2 &amp;gt; /docker.running cat /docker.running service docker restart docker start $(awk &amp;#39;{print $1}&amp;#39; /docker.running) </description>
+    </item>
+    
+    <item>
+      <title>Using Ansible to communicate with rest API</title>
+      <link>https://brainvault.xyz/post/using-ansible-to-communicate-with-rest-api/</link>
+      <pubDate>Fri, 15 Jul 2016 14:15:27 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/using-ansible-to-communicate-with-rest-api/</guid>
+      <description>Ansible to interact with a rest API Sometimes you may want to interact with a rest api where an Ansible module doesn’t already exist. For those cases you may want to try using the uri module. Ansible already supports interacting with json so its pretty easy. Below I show an example of interacting with the Vault api. Link
+You may want to use Vault in cases where there is more sensitive information that you need to ensure that it is encrypted as well as has an audit trail.</description>
+    </item>
+    
+    <item>
+      <title>Tricks for finding directory space usage.</title>
+      <link>https://brainvault.xyz/post/tricks-for-finding-directory-space-usage/</link>
+      <pubDate>Thu, 14 Jul 2016 14:21:36 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/tricks-for-finding-directory-space-usage/</guid>
+      <description>Tricks for finding directory space usage. find . -iname &amp;#34;*regex&amp;#34; -printf &amp;#34;%s\n&amp;#34; | awk &amp;#39;{f+=$1}END{print f/(1024 *1024 * 1024),&amp;#34;GB&amp;#34;}&amp;#39; find . -iname &amp;#34;*.regex&amp;#34; -printf &amp;#34;%s\n&amp;#34; | awk &amp;#39;{f+=$1}END{print f}&amp;#39; another way.
+find -name \*.regex -print0 | du -ch --files0-from=- |tail -1 du -ch -b --max-depth=1 |sort -n|awk &amp;#39;{ print $1/(1024 *1024 * 1024),&amp;#34;gb&amp;#34;, $2 }&amp;#39; Heres almost the same command excluding anything requiring special notation close to zero.
+du -ch -b --max-depth=1 |sort -n|awk &amp;#39;{ print $1/(1024 *1024 * 1024),&amp;#34;gb&amp;#34;, $2 }&amp;#39; |grep -v e-0 another way.</description>
+    </item>
+    
+    <item>
+      <title>Infiniband performance tuning</title>
+      <link>https://brainvault.xyz/post/infiniband-performance-tuning/</link>
+      <pubDate>Wed, 13 Jul 2016 14:27:51 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/infiniband-performance-tuning/</guid>
+      <description>I’ll present the caveat and warning that all these things I tested not with a view to stability for a production environment but this allowed me to get an idea of what things I could do to eke out more performance.
+There were a few of basic designs I tested with. The hardware was a supermicro chassis with E5 series intel cpu’s 2x quad core 64GB ram. The raid card was LSI 9266-8i (capacitor bbu + fastpath and cachecade addons) that connected to a supermicro sas expander backplane.</description>
+    </item>
+    
+    <item>
+      <title>SMP affinity makes a difference</title>
+      <link>https://brainvault.xyz/post/smp-affinity-makes-a-difference/</link>
+      <pubDate>Wed, 13 Jul 2016 14:25:48 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/smp-affinity-makes-a-difference/</guid>
+      <description>A good driver. Having a driver that uses the proper interrupt handling makes a difference in high bandwidth pci devices like RAID cards and Infiniband.
+For example having the stock 2.6.32-220 megasas driver only makes use of one interrupt.
+This was the stock driver in the centos 2.6.32-220 kernel
+[root@demo mnt]# cat /proc/interrupts |grep megasas  79: 2506 0 0 0 0 0 0 0 IR-PCI-MSI-edge megasas This is the driver from LSI compiled against the same kernel sources.</description>
+    </item>
+    
+    <item>
+      <title>BASH tricks</title>
+      <link>https://brainvault.xyz/post/bash-tricks/</link>
+      <pubDate>Sat, 02 Jul 2016 14:11:47 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/post/bash-tricks/</guid>
+      <description>Just a bunch of bash tricks i’ve picked up. Save a backup copy of a file with a datestamp.
+cp script.sh script.sh.$(date +%Y%m%d%H%M) Generate a random string maybe for api key or password.
+cat /dev/urandom | env LC_CTYPE=C tr -dc &amp;#39;a-zA-Z0-9&amp;#39; | fold -w 32 | head -n 1 Find empty directories.
+find . -mindepth 1 -maxdepth 1 -type d -empty List processes being used by remote terminals and then show the files that may be opened by them.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://brainvault.xyz/marp/build_systems/build_systems/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/marp/build_systems/build_systems/</guid>
+      <description>Resilient scalable build systems  or: How I Learned to Stop Worrying and Love AWS
+ What do we need to do?  Build a resilient infrastructure platform  Orchestrator: Jenkins + EKS Filesystem: EFS Load balancer: Nginx ingress   Put Jenkins on top of infra Talk about the ideology and other concerns Questions   Why do we need to do better than running Jenkins on EC2?  Jenkins does not support native high availability as a feature Why?</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://brainvault.xyz/search/placeholder/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/search/placeholder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://brainvault.xyz/top/books/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/top/books/</guid>
+      <description>Machine learning Coursera Machine learningMachine Learning：https://www.</description>
+    </item>
+    
+    <item>
+      <title>Posts Archive</title>
+      <link>https://brainvault.xyz/top/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/top/archive/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

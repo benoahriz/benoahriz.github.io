@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="The Brain Vault">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://brainvault.xyz/images/home-bg2.png">
+    <meta property="twitter:image" content="https://brainvault.xyz/images/home-bg2.png" />
+    
+
+    
+    <meta name="title" content="Infiniband performance tuning" />
+    <meta property="og:title" content="Infiniband performance tuning" />
+    <meta property="twitter:title" content="Infiniband performance tuning" />
+    
+
+    
+    <meta name="description" content="A place to store things.  The brain vault.">
+    <meta property="og:description" content="A place to store things.  The brain vault." />
+    <meta property="twitter:description" content="A place to store things.  The brain vault." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Infiniband performance tuning | brain vault Blog</title>
+
+    <link rel="canonical" href="/post/infiniband-performance-tuning/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">The Brain Vault</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/photography">Photography</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/images/home-bg2.png')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Infiniband performance tuning</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;Benjamin Rizkowsky&#34;
+                             
+                            on 
+                            Wednesday, July 13, 2016
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <p>I’ll present the caveat and warning that all these things I tested not with a view to stability for a production environment but this allowed me to get an idea of what things I could do to eke out more performance.</p>
+<p>There were a few of basic designs I tested with. The hardware was a supermicro chassis with E5 series intel cpu’s 2x quad core 64GB ram. The raid card was LSI 9266-8i (capacitor bbu + fastpath and cachecade addons) that connected to a supermicro sas expander backplane. I tested with several different array’s of disks the most interesting were the SSD’s so for this example I was using 10 samsung 840pro 512gb ssd’s in raid 10 plus 2 hotspares. This server setup was designed to serve raw LVM based lun’s to single U nodes via 20gb Infiniband running ISCSI protocol.</p>
+<p>Here is a general list of stuff I did to maximize the performance I learned a lot about what things made the most differences. I also worked extensively with the engineers at LSI to optimize things.</p>
+<h2 id="hardware">Hardware.</h2>
+<h2 id="pci-slots">PCI slots.</h2>
+<p>Its not stated anywhere in the documentation but faster is not always better. Working directly with the LSI engineers I learned that for the greatest speed and stability you should be using an 8x pci slot for the raid card. Also you want to make sure that your infiniband cards are registering at the right speeds on the PCI bus. You’ll want to use ‘lspci’ with lots of verbosity to verify that the pci cards come up at the right speeds. I had some driver and BIOS issues that caused some infiniband cards to only come up at half speed or 2.5gb/s vs 5.0gb/s</p>
+<h2 id="bios-updates">BIOS updates</h2>
+<p>For the head nodes I was using INTEL chassis with Intel chipsets. These were very buggy and needed to be constantly updated as Intel was fixing things in the BIOS which caused great instability. Make sure all the BIOS is latest and greatest. Supermicro’s firmware’s seemed much more stable in comparison.</p>
+<h2 id="protocols">Protocols.</h2>
+<p>This is a very interesting topic. In a nutshell this was probably the biggest benefit. Originally I had been using Ethernet over infiniband or IPoIB which gave me very fast speeds compared to 1gb networking but no where near the speeds I would expect to see from a raid10 SSD array via 20gb infiniband. Using IPoIB also bogged down cpu’s so wasn’t ideal in my situation. So the magic really starts when you use iscsi + iser + RDMA.</p>
+<p>You still need IP based communication to do the target discovery but once the nodes all know about each other they switch to using RDMA which is way more efficient. This requires using a iscsi target software that supports iser as well as compiling the drivers for your current kernel from the Mellanox or OFED package of your choice.</p>
+<h2 id="linux-distribution">Linux Distribution</h2>
+<p>Primarily I tested centos 6 however I also tested with Ubuntu 12.04. The best performance really depended on the kernel version.</p>
+<h2 id="kernel">Kernel</h2>
+<p>I tested with centos 6 default and Ubuntu’s 12.04 kernels and they both gave mediocre results. I highly recommend the mainline kernel repo the mainline kernel had some significant performance patches/fixes for SSD’s in general.</p>
+<p><a href="http://elrepo.org/tiki/kernel-ml">elrepo Mainline Kernel</a></p>
+<h2 id="iscsi-software">ISCSI software</h2>
+<p>In Linux there are a few choices here. Originally I had been using ietd but then moved to tgtd because of support for iser RDMA which was a critical performance gain.</p>
+<p><a href="http://stgt.sourceforge.net/">stgt</a></p>
+<h2 id="infiniband-softwaredrivers">Infiniband software/drivers.</h2>
+<p>Originally I had worked with the OFED drivers but soon realized that my Mellanox branded cards performed better when I used the firmware specifically from Mellanox it was an older revision of OFED but compiled specifically for my cards.</p>
+<p><a href="http://www.mellanox.com/page/products_dyn?product_family=26&amp;mtag=linux_sw_drivers">MLNX branded drivers</a></p>
+<p>This was a very helpful guide on the tuning recommendations I followed.
+<a href="http://www.mellanox.com/related-docs/prod_software/Performance_Tuning_Guide_for_Mellanox_Network_Adapters.pdf">Performance Tuning Guide for Mellanox Network Adapters</a></p>
+<h2 id="sysctlconf">sysctl.conf</h2>
+<p>The settings in sysctl.conf made significant improvements on performance.</p>
+<h2 id="network-settings">Network settings</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_timestamps<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_sack<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_mem<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span> <span style="color:#bd93f9">16777216</span> <span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_rmem<span style="color:#ff79c6">=</span><span style="color:#bd93f9">4096</span> <span style="color:#bd93f9">87380</span> <span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_wmem<span style="color:#ff79c6">=</span><span style="color:#bd93f9">4096</span> <span style="color:#bd93f9">65536</span> <span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.ipv4.tcp_low_latency <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>net.core.rmem_max<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.core.wmem_max<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.core.rmem_default<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.core.wmem_default<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.core.optmem_max<span style="color:#ff79c6">=</span><span style="color:#bd93f9">16777216</span>
+</span></span><span style="display:flex;"><span>net.core.netdev_max_backlog<span style="color:#ff79c6">=</span><span style="color:#bd93f9">250000</span>
+</span></span></code></pre></div><h2 id="virtual-memory-settings">Virtual memory settings</h2>
+<p>Of the sysctl settings these defintily make a huge difference. Depending on the workloads of the guest machines these settings could be tweaked per your environment. I noticed significant differences in performance based on different types of workloads. YMMV</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vm.swappiness<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>vm.zone_reclaim_mode<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>vm.dirty_ratio<span style="color:#ff79c6">=</span><span style="color:#bd93f9">10</span>
+</span></span><span style="display:flex;"><span>vm.dirty_background_ratio<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>
+</span></span></code></pre></div><h2 id="irq-affinity">IRQ affinity</h2>
+<p>This was a HUGE item to improve performance. First disable irqbalance and manually pin your cpu/irq affinity.
+The Mellanox package comes with a shell script that was helpful in resetting the affinity. I used this same script to help balance between my raid card and Infiniband card. Also since I had dual a dual socket motherboard I thought it best to install the infiniband card on one PCI bus and the raid card on the other bus with the other cpu.
+set_irq_affinity_cpulist.sh is the name of the script.</p>
+<h3 id="unbalanced">Unbalanced</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">[</span>root@demo mnt<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /proc/interrupts |grep megasas</span>
+</span></span><span style="display:flex;"><span>  80:       <span style="color:#bd93f9">2506</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  81:        <span style="color:#bd93f9">124</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  82:         <span style="color:#bd93f9">24</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  83:          <span style="color:#bd93f9">7</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  84:        <span style="color:#bd93f9">993</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  85:         <span style="color:#bd93f9">80</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  86:         <span style="color:#bd93f9">17</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  87:          <span style="color:#bd93f9">8</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span></code></pre></div><h3 id="balanced">Balanced</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cat /proc/interrupts |grep mega
+</span></span><span style="display:flex;"><span>  80:     <span style="color:#bd93f9">650586</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  81:     <span style="color:#bd93f9">242572</span>      <span style="color:#bd93f9">87388</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  82:     <span style="color:#bd93f9">240192</span>          <span style="color:#bd93f9">0</span>     <span style="color:#bd93f9">247210</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  83:      <span style="color:#bd93f9">41286</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>      <span style="color:#bd93f9">42410</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  84:     <span style="color:#bd93f9">184197</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>      <span style="color:#bd93f9">52479</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  85:     <span style="color:#bd93f9">113659</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>      <span style="color:#bd93f9">58953</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  86:      <span style="color:#bd93f9">33822</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>      <span style="color:#bd93f9">37659</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  87:      <span style="color:#bd93f9">28633</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>      <span style="color:#bd93f9">35605</span>  IR-PCI-MSI-edge      megasas
+</span></span></code></pre></div><p>Some additional reading on interrupts spreading.</p>
+<p><a href="http://www.alexonlinux.com/msi-x-the-right-way-to-spread-interrupt-load">msi-x-the-right-way-to-spread-interrupt-load</a></p>
+<p><a href="http://www.alexonlinux.com/smp-affinity-and-proper-interrupt-handling-in-linux">smp-affinity-and-proper-interrupt-handling-in-linux</a></p>
+<ul>
+<li>
+<p>Openib.conf</p>
+<p>This file allowed me to enable and disable certain drivers. Specifically I wanted to enable the iser as well as IPoIB</p>
+</li>
+<li>
+<p>CPU frequency/speed.</p>
+</li>
+<li>
+<p>Raid firmware</p>
+<p>If you update the raid firmware make sure that all the settings are set correctly still.</p>
+<p>Also double check to make sure that the drivers are using enough interuppts.
+For example the stock megaraid_sas driver was only using 1 interrupt. Installing the latest driver from LSI allowed all 8 to be used.</p>
+</li>
+</ul>
+<h3 id="before-and-then-after-installing-the-new-driver">Before and then after installing the new driver.</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ff79c6">[</span>root@demo mnt<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /proc/interrupts |grep megasas</span>
+</span></span><span style="display:flex;"><span>  79:       <span style="color:#bd93f9">2506</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">[</span>root@demo mnt<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat /proc/interrupts |grep megasas</span>
+</span></span><span style="display:flex;"><span>  80:       <span style="color:#bd93f9">2506</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  81:        <span style="color:#bd93f9">124</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  82:         <span style="color:#bd93f9">24</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  83:          <span style="color:#bd93f9">7</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  84:        <span style="color:#bd93f9">993</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  85:         <span style="color:#bd93f9">80</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  86:         <span style="color:#bd93f9">17</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span><span style="display:flex;"><span>  87:          <span style="color:#bd93f9">8</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>          <span style="color:#bd93f9">0</span>  IR-PCI-MSI-edge      megasas
+</span></span></code></pre></div><p>Check this link at the bottom it has an attached PDF which is a really good runthrough of all the information you need.</p>
+<p><a href="http://mycusthelp.info/LSI/_cs/AnswerDetail.aspx?inc=8196">LSI tuning guide</a></p>
+<h2 id="c-states">C-states</h2>
+<h2 id="disk-schedulers">Disk Schedulers</h2>
+<h2 id="hugepages">Hugepages</h2>
+<h2 id="ssd-brands">SSD brands</h2>
+<p>The samsung 840pro’s gave much much worse performance than earlier plextor m5 256gb drives I used in the past. These newer samsung drives are much slower and have a known issue with the caching on disk that conflicts with LSI firmware making them good or desktop machines but not very good in a Raid Array. I highly recommend researching this issue. Some people have worked around this by flashing differently branded firmwares onto the LSI branded cards. I wasn’t brave enough to risk bricking my raid cards so I didn’t try it.</p>
+<h2 id="mount-options">Mount options</h2>
+<p>Much performance can be gained as well by adding less safe mount options.
+The best performance I saw was when I tested against ext4 with</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>discard,noatime,data<span style="color:#ff79c6">=</span>writeback,barrier<span style="color:#ff79c6">=</span>0,acl,user_xattr,nobh
+</span></span></code></pre></div><p>More to come&hellip;</p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/smp-affinity-makes-a-difference/" data-toggle="tooltip" data-placement="top" title="SMP affinity makes a difference">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/tricks-for-finding-directory-space-usage/" data-toggle="tooltip" data-placement="top" title="Tricks for finding directory space usage.">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+<div id="disqus-comment"></div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "thebrainvaultorg" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/apt-cacher-ng" title="apt-cacher-ng">
+                            apt-cacher-ng
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/apt-get" title="apt-get">
+                            apt-get
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/configuration" title="configuration">
+                            configuration
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker-for-mac" title="docker-for-mac">
+                            docker-for-mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dockerfile" title="dockerfile">
+                            dockerfile
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://github.com/bparli">Ben Parli</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/relistan">Karl Matthias</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/mihaitodor">Mihai Todor</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:benoahriz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    <li>
+                        <a href="https://twitter.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/benjaminrizkowsky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="The Brain Vault" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; The Brain Vault 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

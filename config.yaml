@@ -1,0 +1,108 @@
+baseURL: 'https://brainvault.xyz'
+languageCode: en-us
+title: BrainVault
+disqusShortname: thebrainvaultorg
+theme:
+  - hugo-theme-cleanwhite
+resourceDir: ../resources
+DefaultContentLanguage: en
+SectionPagesMenu: main
+Paginate: 5
+googleAnalytics: ''
+enableRobotsTXT: true
+languages:
+  en:
+    title: The Brain Vault
+    weight: 1
+    contentDir: content
+sitemap:
+  changefreq: monthly
+  priority: 0.5
+  filename: sitemap.xml
+preserveTaxonomyNames: true
+paginate: 5
+hasCJKLanguage: true
+outputs:
+  home:
+    - HTML
+    - RSS
+    - Algolia
+params:
+  header_image: 'images/home-bg2.png'
+  author: Benjamin Rizkowsky
+  favicon: 'images/brainvault_small.png'
+  site_logo: 'images/brainvault_small.png'
+  description: A place to store things.  The brain vault.
+  background_color_class: bg-black
+  recent_posts_number: 5
+  SEOTitle: brain vault Blog
+  image_404: img/404-bg.jpg
+  omit_categories: false
+  page_view_conter: false
+  leancloud_app_id: ''
+  leancloud_app_key: ''
+  algolia_search: true
+  algolia_appId: ''
+  algolia_indexName: ''
+  algolia_apiKey: ''
+  sidebar_about_description: 'Technology Leader, Devops Enthusiast, Open Source Advocate and Maker'
+  sidebar_avatar: 'https://en.gravatar.com/userimage/60895955/a5edf0cb78366e30811b9fc309063008.jpg?size=200'
+  featured_tags: true
+  featured_condition_size: 1
+  ba_track_id: ''
+  disqus_proxy: ''
+  disqus_site: ''
+  twikoo_env_id: ''
+  reward: false
+  friends: true
+  bookmarks: false
+  about_me: true
+  social:
+    rss: true
+    email: benoahriz@gmail.com
+    linkedin: 'https://www.linkedin.com/in/benjaminrizkowsky'
+    stackoverflow: 'https://stackoverflow.com/users/benoahriz'
+    github: 'https://github.com/benoahriz'
+    twitter: 'https://twitter.com/benoahriz'
+  friend_link:
+    - title: Ben Parli
+      href: 'https://github.com/bparli'
+    - title: Karl Matthias
+      href: 'https://github.com/relistan'
+    - title: Mihai Todor
+      href: 'https://github.com/mihaitodor'
+  bookmark_link:
+    - title: Martin Fowler
+      href: 'https://martinfowler.com'
+  addtional_menus:
+    - title: ABOUT
+      href: /top/about/
+    - title: BOOKS
+      href: /top/books/
+    - title: ARCHIVE
+      href: /top/archive/
+    - title: Photography
+      href: /top/photography
+  algolia:
+    vars:
+      - title
+      - summary
+      - date
+      - publishdate
+      - expirydate
+      - permalink
+    params:
+      - categories
+      - tags
+outputFormats:
+  Algolia:
+    baseName: algolia
+    isPlainText: true
+    mediaType: application/json
+    notAlternative: true
+markup:
+  tableOfContents:
+    endLevel: 2
+    startLevel: 1
+  highlight:
+    style: dracula

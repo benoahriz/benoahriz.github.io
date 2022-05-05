@@ -1,0 +1,42 @@
+
+<div class="entry-shang text-center">
+    {{ if .Site.Params.reward_guide }}
+	    <p> 「{{ .Site.Params.reward_guide }}」</p>
+	{{ else }}
+	    <p> </p>
+	{{ end }}
+	<button class="zs show-zs btn btn-bred">____</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="{{ .Site.BaseURL }}"><img src="{{ "img/favicon.png" | relURL}}" />{{ .Site.Title }}</a></span>
+        {{ if .Site.Params.reward_guide }}
+	        <p class="tip"><i></i><span>{{ .Site.Params.reward_guide }}</span></p>
+		{{ else }}
+	        <p class="tip"><i></i><span>____</span></p>
+		{{ end }}
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">____</button>
+			<button class="btn btn-blink" data-num="5">____</button>
+			<button class="btn btn-blink" data-num="10">____</button>
+			<button class="btn btn-blink" data-num="50">____</button>
+			<button class="btn btn-blink" data-num="100">____</button>
+			<button class="btn btn-blink" data-num="1">____</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">____</button>
+			<p>____<span id="pay-type">____</span>____</p>
+			<img src="{{ "img/reward/wechat-2.png" | relURL }}"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="{{ "img/reward/wechat-btn.png" | relURL }}"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="{{ "img/reward/alipay-btn.png" | relURL }}"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="{{ "js/reward.js" | relURL }}"></script>

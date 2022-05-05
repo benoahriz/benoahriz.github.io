@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on The Brain Vault</title>
+    <link>https://brainvault.xyz/tags/</link>
+    <description>Recent content in Tags on The Brain Vault</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://brainvault.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>aws</title>
+      <link>https://brainvault.xyz/tags/aws/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>efs</title>
+      <link>https://brainvault.xyz/tags/efs/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/efs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jenkins</title>
+      <link>https://brainvault.xyz/tags/jenkins/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/jenkins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kubernetes</title>
+      <link>https://brainvault.xyz/tags/kubernetes/</link>
+      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag1</title>
+      <link>https://brainvault.xyz/tags/tag1/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/tag1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tag2</title>
+      <link>https://brainvault.xyz/tags/tag2/</link>
+      <pubDate>Mon, 04 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/tag2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>astronomy</title>
+      <link>https://brainvault.xyz/tags/astronomy/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/astronomy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>astrophotography</title>
+      <link>https://brainvault.xyz/tags/astrophotography/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/astrophotography/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DOCKER</title>
+      <link>https://brainvault.xyz/tags/docker/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go-dexec</title>
+      <link>https://brainvault.xyz/tags/go-dexec/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/go-dexec/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>go-dockerclient</title>
+      <link>https://brainvault.xyz/tags/go-dockerclient/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/go-dockerclient/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
+      <link>https://brainvault.xyz/tags/golang/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>APT-CACHER-NG</title>
+      <link>https://brainvault.xyz/tags/apt-cacher-ng/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/apt-cacher-ng/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>APT-GET</title>
+      <link>https://brainvault.xyz/tags/apt-get/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/apt-get/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CONFIGURATION</title>
+      <link>https://brainvault.xyz/tags/configuration/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/configuration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DOCKER FOR MAC</title>
+      <link>https://brainvault.xyz/tags/docker-for-mac/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/docker-for-mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DOCKERFILE</title>
+      <link>https://brainvault.xyz/tags/dockerfile/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/dockerfile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>UBUNTU</title>
+      <link>https://brainvault.xyz/tags/ubuntu/</link>
+      <pubDate>Wed, 20 Jul 2016 14:05:46 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hacks</title>
+      <link>https://brainvault.xyz/tags/hacks/</link>
+      <pubDate>Mon, 18 Jul 2016 14:09:25 +0000</pubDate>
+      
+      <guid>https://brainvault.xyz/tags/hacks/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

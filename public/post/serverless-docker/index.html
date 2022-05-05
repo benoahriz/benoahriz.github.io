@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="The Brain Vault">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://brainvault.xyz/images/home-bg2.png">
+    <meta property="twitter:image" content="https://brainvault.xyz/images/home-bg2.png" />
+    
+
+    
+    <meta name="title" content="Server...less docker" />
+    <meta property="og:title" content="Server...less docker" />
+    <meta property="twitter:title" content="Server...less docker" />
+    
+
+    
+    <meta name="description" content="A place to store things.  The brain vault.">
+    <meta property="og:description" content="A place to store things.  The brain vault." />
+    <meta property="twitter:description" content="A place to store things.  The brain vault." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Server...less docker | brain vault Blog</title>
+
+    <link rel="canonical" href="/post/serverless-docker/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">The Brain Vault</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/photography">Photography</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/images/home-bg2.png')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        <a class="tag" href="/tags/golang" title="golang">
+                            golang
+                        </a>
+                        
+                        <a class="tag" href="/tags/go-dockerclient" title="go-dockerclient">
+                            go-dockerclient
+                        </a>
+                        
+                        <a class="tag" href="/tags/go-dexec" title="go-dexec">
+                            go-dexec
+                        </a>
+                        
+                    </div>
+                    <h1>Server...less docker</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;Benjamin Rizkowsky&#34;
+                             
+                            on 
+                            Sunday, July 24, 2016
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h2 id="serverless-docker-or-stream-processing-with-docker-using-golang">Server&hellip;less Docker&hellip; or stream processing with docker using golang.</h2>
+<p>At Dockercon I saw a &lsquo;cool hack&rsquo; they called <a href="https://github.com/bfirsh/serverless-docker">server-less docker</a>.  Basically the idea is to use containers as functions in programs instead of using containers as servers.</p>
+<p>This brings back the concept of <a href="https://en.wikipedia.org/wiki/Common_Gateway_Interface">cgi</a>.  Further on the idea of server-less docker is to create a program and inside the program functions call out to containers to do the work.</p>
+<p>Instead of needing to maintain a huge cluster of servers for a particular purpose you can have raw compute available as a swarm cluster and just utilize it as necessary for whatever computation you need.  These functions can scale as much as you need on demand.</p>
+<p>In my experiments I got familiar with the following golang docker libraries.</p>
+<ul>
+<li><a href="https://github.com/fsouza/go-dockerclient">go-dockerclient</a></li>
+<li><a href="https://github.com/ahmetalpbalkan/go-dexec">go-dexec</a></li>
+</ul>
+<h3 id="go-dexec">go-dexec</h3>
+<p>This is a library to emulate most of the functionality with some exceptions to the exec library for calling functions and attaching to the cmd inputs and outputs.</p>
+<h3 id="go-dockerclient">go-dockerclient</h3>
+<p>This is the best docker client library for golang.  Pretty much if you are doing any work with the docker api you&rsquo;ll want to use this library.</p>
+<p>Ok so in comes my project called <a href="https://github.com/benoahriz/go-hydra">go-hydra</a>.  I have a few goals in  my experiments.</p>
+<p>One was to create an <a href="https://github.com/dagwieers/unoconv">unoconv</a> container that can take stdin and produce stdout that is usable.</p>
+<p>Another goal was to get familiar with the go http or mux package as well as go-dexec.</p>
+<p>The goal of go-hydra is to be a front end http api/server that serves client requests that get processed on the back end which would normally be a docker swarm cluster.  Each function runs a separate container and sends the response back to the client.  The containers would primarily use stdin and stdout if possible.</p>
+<h2 id="the-first-piece">The first piece.</h2>
+<p>In my use case I wanted to create a docker container that would take stdin and produce stdout of raw bytes.   This would allow you to do something like the following.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;test&#34;</span> |docker run unoconv2 --stdin --stdout f pdf &gt; testpdf.pdf
+</span></span></code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat test/Checklist-Ubuntu_v7.pdf| docker run unoconv2 --stdin --stdout --format<span style="color:#ff79c6">=</span>txt &gt; file.txt
+</span></span></code></pre></div><p>This was a bit of a headache as the standard versions of unoconv in ubuntu 14.04 do not have support for stdin.  This means no streaming input :(</p>
+<p>I had to basically build it off the latest code in the repo which has the support for stdin. See the dockerfile for details.  <a href="https://github.com/benoahriz/go-hydra/blob/master/Dockerfile">Link</a></p>
+<p>Also unrelated to my hack projects main goals I also got a proof of concept apt-cacher-ng detector for build scripts which can greatly reduce the time needed for building container images that use apt packages.</p>
+<h2 id="golang-http">golang http</h2>
+<p>My second implementation experiment was to create a simple rudimentary http server that would execute some proof of concept code using the containers.</p>
+<p>First I implemented a simple uploader&hellip; in theory my goal is to not need the uploader at all and stream the data direct from the client.  However one step at a time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>go run main.go
+</span></span></code></pre></div><p>Then visit this url.  http://localhost:8080/upload</p>
+<p>You can use this to simply upload your file to be processed to the http server.</p>
+<p>Then once the file is uploaded.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> curl <span style="color:#f1fa8c">&#34;http://localhost:8080/toupper/txt?filename=README.md&#34;</span>
+</span></span></code></pre></div><p>The result you&rsquo;ll see is on the console of the web server.  This was a simple example not using the unoconv script but using simple &rsquo;tr&rsquo; to convert the text to uppercase.</p>
+<p>The way this is currently sort of working is that i&rsquo;m reading the file in and then sending it to stdin to the container then capturing the result in stdout of the app.  The real goal was to get the output streamed into the body of the response but there are some shortcomings with the dexec library.</p>
+<p>There are some major issues with these experiments.  Firstly that the unoconv library doesn&rsquo;t always work as expected.  I didn&rsquo;t go into  depth trying to figure out what was wrong with it.  So instead I continued with using the tr example on the dexec readme.  The other issues I ran into were the implementation of stdinpipe and stdoutpipe in dexec only allow you to use one at a time and I will need to dig deeper to figure out how to get that to work right.</p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/apt-cacher-ng-with-docker-builds/" data-toggle="tooltip" data-placement="top" title="Speeding up Docker builds">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/the-pancake-stack/" data-toggle="tooltip" data-placement="top" title="The Pancake Stack">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+<div id="disqus-comment"></div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "thebrainvaultorg" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/apt-cacher-ng" title="apt-cacher-ng">
+                            apt-cacher-ng
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/apt-get" title="apt-get">
+                            apt-get
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/configuration" title="configuration">
+                            configuration
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker-for-mac" title="docker-for-mac">
+                            docker-for-mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dockerfile" title="dockerfile">
+                            dockerfile
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://github.com/bparli">Ben Parli</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/relistan">Karl Matthias</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/mihaitodor">Mihai Todor</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:benoahriz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    <li>
+                        <a href="https://twitter.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/benjaminrizkowsky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="The Brain Vault" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; The Brain Vault 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="The Brain Vault">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://brainvault.xyz/images/home-bg2.png">
+    <meta property="twitter:image" content="https://brainvault.xyz/images/home-bg2.png" />
+    
+
+    
+    <meta name="title" content="The Pancake Stack" />
+    <meta property="og:title" content="The Pancake Stack" />
+    <meta property="twitter:title" content="The Pancake Stack" />
+    
+
+    
+    <meta name="description" content="A place to store things.  The brain vault.">
+    <meta property="og:description" content="A place to store things.  The brain vault." />
+    <meta property="twitter:description" content="A place to store things.  The brain vault." />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>The Pancake Stack | brain vault Blog</title>
+
+    <link rel="canonical" href="/post/the-pancake-stack/">
+
+    
+    
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hugo-theme-cleanwhite.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.1/css/all.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    <script src="/js/jquery.min.js"></script>
+
+    
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">The Brain Vault</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">All Posts</a>
+                    </li>
+                    
+                        
+                        <li>
+                            <a href="/categories/tech">tech</a>
+                        </li>
+                        
+                    
+                    
+		    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/archive/">ARCHIVE</a></li>
+                    
+                        <li><a href="/top/photography">Photography</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search"><i class="fa fa-search"></i></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/images/home-bg2.png')
+    }
+</style>
+
+<header class="intro-header" >
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>The Pancake Stack</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        
+                            Posted by 
+                            
+                                     &#34;Benjamin Rizkowsky&#34;
+                             
+                            on 
+                            Wednesday, August 23, 2017
+                            
+                            
+                            
+                            
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <h1 id="the-pancake-stack">The Pancake Stack</h1>
+<p>At <a href="https://gonitro.com/">Nitro</a>, we have tried to embrace the idea that <a href="https://medium.com/@NitroEng/can-micro-services-systems-be-simple-2f8e91c8c268">simple systems</a> are key to scalable and efficient infrastructure and micro-services and help maximize innovation, velocity, and trust.</p>
+<p>If you have not heard this talk by <a href="https://en.wikipedia.org/wiki/Clojure">Rich Hickey</a>, please take the time to watch <a href="https://www.infoq.com/presentations/Simple-Made-Easy">this talk</a>. The points made are invaluable for systems and software development. &ldquo;Simple&rdquo; is the opposite of &ldquo;complex,&rdquo; which means &ldquo;being intertwined&rdquo; or &ldquo;being tied together.&rdquo; Simple is not easy, but simple is something to strive for whenever possible. Simple systems are easier to understand and reason about, support and change. If there is one thing we know in this industry, there is always something better coming out, and it can be valuable to replace older components with newer, more simple, more efficient ones. Simple systems are sound and are loosely coupled.</p>
+<p>Current infrastructure frameworks and stacks have benefits and drawbacks, and many of them attempt to solve the same functional goals. Our code has a lifecycle: It is built, deployed, tested, and promoted to production; there also needs to exist a mechanism for rolling back versions and killing obsolete or errant tasks. We need a system that can efficiently manage &lsquo;compute&rsquo; resources and get our code in front of our customers. The systems and platforms that can serve this lifecycle are generally composed of several components.</p>
+<ul>
+<li>
+<p>Compute resources.</p>
+</li>
+<li>
+<p>Resource managers.</p>
+</li>
+<li>
+<p>Schedulers.</p>
+</li>
+<li>
+<p>Service discovery.</p>
+</li>
+<li>
+<p>Load Balancers.</p>
+</li>
+</ul>
+<p>Many stacks that herd these components include Kubernetes, Docker swarm, Mesosphere, Vmware, Rancher, Heroku, and ECS.   We decided to take individual application components and create a custom stack as our infrastructure platform. Let us walk through each layer.</p>
+<h3 id="cloudflarehttpswwwcloudflarecom"><strong><a href="https://www.cloudflare.com/">Cloudflare</a></strong></h3>
+<p>Cloudflare is the first layer we use, which handles DNS, SSL termination, and DOS protection. In a <a href="https://en.wikipedia.org/wiki/High_availability">highly available</a> system there will be multiple ingress endpoints and cloudflare has a nice api that we use for updating dns records in the event that an AWS zone goes unhealthy. We use a tool <a href="https://github.com/bparli">Ben Parli</a> developed called <a href="https://github.com/bparli/goavail">Goavail</a>. Goavail is a simple IP monitoring and fast DNS failover agent written in Go. More information can be found <a href="https://medium.com/@bparli/writing-goavail-a-cloud-monitoring-and-fast-dns-failover-agent-7c59254a5c45">here</a>.</p>
+<h3 id="traefikhttpsgithubcomnitrotraefik"><strong><a href="https://github.com/nitro/traefik">Traefik</a></strong></h3>
+<p>After ingress traffic makes it through Cloudflare, it hits our ingress termination points. We previously had used HAproxy for ingress termination, which was great but moved to a proxy called <a href="https://github.com/nitro/traefik">Traefik</a>. Since schedulers can place tasks on any number of hosts in any part of the infrastructure, there is no guarantee that an app will stay in one place for long, so dynamic service mappings are critical for ingress traffic to get to the right place. Traefik made more sense than haproxy as we wrote a plugin to configure backends using our service discovery tool, Sidecar, automatically. Ingress traffic comes into Traefik, and based on the status of the internal apps, Sidecar lets Traefik know where to send the traffic.</p>
+<h3 id="sidecarhttpsgithubcomnitrosidecar--haproxy-apihttpsgithubcomnitrohaproxy-api"><strong><a href="https://github.com/nitro/sidecar">Sidecar</a> / <a href="https://github.com/nitro/haproxy-api">haproxy-api</a></strong></h3>
+<p>Sidecar is an eventually consistent service discovery platform where hosts learn about each other&rsquo;s state&rsquo; via a <a href="https://www.serf.io/docs/internals/gossip.html">gossip protocol</a>. Hosts exchange messages about which services they are running and which have gone away(tombstoned). Sidecar optionally works alongside the included app called <a href="https://github.com/nitro/haproxy-api">haproxy-api</a>, which takes state information from the Sidecar cluster and updates a locally running copy of haproxy to handle the dynamic port mappings to service ports. All apps are shipped as Docker containers in our environment and Sidecar is designed to work best with Docker. Service names and ports are configured using docker labels which get passed through the system by our deployment tooling Nmesos and singularity/singularity-executor and then to Docker.</p>
+<h3 id="sidecar-executorhttpsgithubcomnitrosidecar-executor-with-vaulthttpsgithubcomhashicorpvault-dockerhttpswwwdockercom-and-nmesoshttpsgithubcomnitronmesos"><strong><a href="https://github.com/Nitro/sidecar-executor">Sidecar-executor</a> with <a href="https://github.com/hashicorp/vault">Vault</a>, <a href="https://www.docker.com/">Docker</a> and <a href="https://github.com/Nitro/nmesos">Nmesos</a></strong></h3>
+<p>With Sidecar and Sidecar Executor, you get service health checking unified with service discovery, regardless of which Mesos scheduler is running. The system is entirely scheduler agnostic to the extent possible. We happen to use it with Singularity.</p>
+<p>Docker is how we ship our applications. Every application gets delivered as a container that is configured by environment variables. We like to adhere to the <a href="https://12factor.net/">12-factor app manifesto</a> as closely as possible, which reduces friction in our infrastructure and keeps things consistent. Every app is delivered as a container, and each container is configured via environment variables. Scaling is accomplished by adding more concurrent containers using our scheduler(in this case, its Singularity).</p>
+<p>Nmesos is a command-line tool that leverages Singularity API to deploy services and schedule jobs in an Apache Mesos cluster.</p>
+<p>Sidecar-executor is designed to work with Vault optionally, so secrets are not exposed to the nodes executing deploys or the Singularity API.</p>
+<h3 id="singularityhttpsgithubcomhubspotsingularity"><strong><a href="https://github.com/HubSpot/Singularity">Singularity</a></strong></h3>
+<p><a href="http://getsingularity.com/">Singularity</a> is a Scheduler (HTTP API and web app) for running Mesos tasks and keeping track of them. There is not much to explain here other than we use Nmesos, as mentioned above, to send task requests to the Mesos cluster, and Singularity takes care of making sure the right amount of tasks are running at any one time.</p>
+<h3 id="dockerhttpswwwdockercom"><strong><a href="https://www.docker.com/">Docker</a></strong></h3>
+<p>Docker, as mentioned earlier, is how we ship our applications. As well as being the package format of our applications, Docker also takes care of assigning dynamic ports and making sure the networking(at the container level), the volumes(again at the container level), and the security of the container are functioning as defined in the job definition.</p>
+<h3 id="mesoshttpmesosapacheorg-with-zookeeperhttpszookeeperapacheorg"><strong><a href="http://mesos.apache.org/">Mesos</a> with <a href="https://zookeeper.apache.org/">Zookeeper</a></strong></h3>
+<p>Mesos might have one of the most important jobs of all. It keeps track of the resources available and allows tasks to be started in the right places. Apache Mesos abstracts CPU, memory, storage, and other compute resources away from machines (physical or virtual). This gives us a pool of resources that can be fully utilized.</p>
+<p>Zookeeper allows Mesos to keep track of state across the resources.</p>
+<h3 id="ec2httpsawsamazoncomec2-with-provisohttpsgithubcomnitroproviso-ectdhttpsgithubcomcoreosetcd-and-ansiblehttpswwwansiblecom"><strong><a href="https://aws.amazon.com/ec2/">Ec2</a> with <a href="https://github.com/nitro/proviso">Proviso</a>, <a href="https://github.com/coreos/etcd">Ectd</a> and <a href="https://www.ansible.com/">Ansible</a></strong></h3>
+<p>We use AWS EC2 because it has a mature API and allows us to scale infrastructure costs as needed. We developed an internal tool called Proviso. We use Proviso to manage our EC2 instances clusters. It stores the cluster state in Etcd, so we can reliably query, provision, and decommission instances. Once a new instance has been provisioned, we use Ansible to run the bootstrap template. This template installs the mandatory packages and sets up the tooling required to monitor the new instance and register it in the Mesos cluster. The bootstrap installs the bare minimum needed tools to get monitoring in place and the Mesos agent running on the machine.</p>
+<p>
+  <figure>
+    <img src="https://brainvault.xyz/images/pancake-stack.png" alt="Pancake Stack Diagram">
+    <center><figcaption>Pancake Stack</figcaption></center>
+  </figure>
+
+</p>
+<p>Special shout-outs to:</p>
+<p>Ben Parli <a href="https://github.com/bparli">https://github.com/bparli</a></p>
+<p>Mihai Todor <a href="https://github.com/mihaitodor">https://github.com/mihaitodor</a></p>
+<p>Felix Borrego <a href="https://github.com/felixgborrego">https://github.com/felixgborrego</a></p>
+<p>Karl Matthias <a href="https://github.com/relistan">https://github.com/relistan</a></p>
+<p>In the following articles, I plan to overview the individual software components in more detail with examples.</p>
+
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/serverless-docker/" data-toggle="tooltip" data-placement="top" title="Server...less docker">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/photogallery/" data-toggle="tooltip" data-placement="top" title="An Example Post">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+
+<div id="disqus-comment"></div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "thebrainvaultorg" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+            </div>
+
+            
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        <a href="/tags/apt-cacher-ng" title="apt-cacher-ng">
+                            apt-cacher-ng
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/apt-get" title="apt-get">
+                            apt-get
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/configuration" title="configuration">
+                            configuration
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker" title="docker">
+                            docker
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/docker-for-mac" title="docker-for-mac">
+                            docker-for-mac
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/dockerfile" title="dockerfile">
+                            dockerfile
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ubuntu" title="ubuntu">
+                            ubuntu
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://github.com/bparli">Ben Parli</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/relistan">Karl Matthias</a></li>
+                        
+                        <li><a target="_blank" href="https://github.com/mihaitodor">Mihai Todor</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">                  
+                    
+                    <li>
+                        <a href="mailto:benoahriz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    <li>
+                        <a href="https://twitter.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+
+		            
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		            
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/benjaminrizkowsky">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		           
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/benoahriz">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+            
+            
+            
+           
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="The Brain Vault" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fas fa-circle fa-stack-2x"></i>
+                               <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+            
+             </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; The Brain Vault 2022
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function loadAsync(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        loadAsync("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    loadAsync("https://cdn.jsdelivr.net/npm/fastclick@1.0.6/lib/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        
+        
+        
+        
+            _containerSelector = 'div.post-container'
+        
+
+        
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        
+        $(selector).html('')
+
+        
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    
+
+
+    loadAsync("\/js\/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+</body>
+</html>
