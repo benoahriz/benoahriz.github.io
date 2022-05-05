@@ -6,16 +6,7 @@
     <description>Recent content in Tech on The Brain Vault</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://brainvault.xyz/categories/tech/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Resilient scalable build systems</title>
-      <link>https://brainvault.xyz/post/jenkins-eks-presentation/</link>
-      <pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://brainvault.xyz/post/jenkins-eks-presentation/</guid>
-      <description>Slides from presentation  </description>
-    </item>
-    
+    <lastBuildDate>Mon, 04 Jun 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://brainvault.xyz/categories/tech/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An Example Post</title>
       <link>https://brainvault.xyz/post/photogallery/</link>
