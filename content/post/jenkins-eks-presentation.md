@@ -6,7 +6,6 @@ date:        2022-05-04
 author:      "Benjamin Rizkowsky"
 image:       ""
 tags:        ["jenkins", "kubernetes", "efs", "aws"]
-categories:  ["Tech" ]
 ---
 
 ### Slides from presentation
