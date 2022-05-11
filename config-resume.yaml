@@ -5,6 +5,8 @@ languageCode: en
 title: 'Benjamin Rizkowsky Resume'
 theme: hugo-devresume-theme
 googleAnalytics: UA-XXXXXXX-Y
+contentDir: nulldir
+publishDir: content/resume
 params:
   footer: 
     copyright: Benjamin Rizkowsky
