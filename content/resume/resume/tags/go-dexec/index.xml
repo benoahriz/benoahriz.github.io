@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>go-dexec on Benjamin Rizkowsky Resume</title>
+    <link>https://brainvaul.xyz/tags/go-dexec/</link>
+    <description>Recent content in go-dexec on Benjamin Rizkowsky Resume</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 24 Jul 2016 21:39:25 +0000</lastBuildDate><atom:link href="https://brainvaul.xyz/tags/go-dexec/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Server...less docker</title>
+      <link>https://brainvaul.xyz/post/serverless-docker/</link>
+      <pubDate>Sun, 24 Jul 2016 21:39:25 +0000</pubDate>
+      
+      <guid>https://brainvaul.xyz/post/serverless-docker/</guid>
+      <description>Server&amp;hellip;less Docker&amp;hellip; or stream processing with docker using golang. At Dockercon I saw a &amp;lsquo;cool hack&amp;rsquo; they called server-less docker. Basically the idea is to use containers as functions in programs instead of using containers as servers.
+This brings back the concept of cgi. Further on the idea of server-less docker is to create a program and inside the program functions call out to containers to do the work.
+Instead of needing to maintain a huge cluster of servers for a particular purpose you can have raw compute available as a swarm cluster and just utilize it as necessary for whatever computation you need.</description>
+    </item>
+    
+  </channel>
+</rss>

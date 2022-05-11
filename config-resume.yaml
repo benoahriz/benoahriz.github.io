@@ -1,0 +1,194 @@
+baseURL: 'https://brainvaul.xyz/resume'
+# set it like below for local testing
+# baseURL: 'https://brainvaul.xyz/'
+languageCode: en
+title: 'Benjamin Rizkowsky Resume'
+theme: hugo-devresume-theme
+googleAnalytics: UA-XXXXXXX-Y
+params:
+  footer: 
+    copyright: Benjamin Rizkowsky
+  author: Benjamin Rizkowsky
+  description: Resume for Benjamin Rizkowsky
+  primaryColor: '#54B689'
+  textPrimaryColor: '#292929'
+  profile:
+    enable: true
+    name: Benjamin Rizkowsky
+    tagline: Principal DevOps Engineer
+    # avatar: gravatar.png
+  contact:
+    enable: true
+    location: Newport Beach California
+    list:
+      - icon: fas fa-phone-square
+        url: 'tel:#'
+        text: 650 735 1722
+      - icon: fas fa-envelope-square
+        url: 'mailto:#'
+        text: benoahriz@gmail.com
+      - icon: fas fa-globe
+        url: '#'
+        text: www.brainvault.xyz
+  professionalprofile:
+    enable: true
+    list:
+      - title: PROVEN METHODOLOGY
+        items:
+          - details: Demonstrated systems and creative expertise in engineering, programming, analysis, database technologies, automation, and architecture.
+          - details: Recognized by employers for the ability to turn business visions into technological realities with excellent outcomes.
+          - details: Project leader, including implementation and investigative requirements and numerous diverse technology management activities.
+      - title: DEMONSTRATED RESULTS
+        items:
+          - details: Demonstrated systems and creative expertise in engineering, programming, analysis, database technologies, automation, and architecture.
+          - details: Recognized by employers for the ability to turn business visions into technological realities with excellent outcomes.
+          - details: Project leader, including implementation and investigative requirements and numerous diverse technology management activities.
+  skills:
+    enable: true
+    list:
+      - title: Professional
+        items:
+          - details: Effective communication
+          - details: Technology Leadership
+          - details: Strong problem solver
+          - details: 
+      - title: Technical
+        items:
+          - details: Docker, Kubernetes, GitLab, GitHub, Jenkins, Rundeck, EC2, DataDog, NewRelic
+          - details: AWS, Centos, Amazon Linux, Ubuntu, Debian, XenServer, VMware, AWS, KVM, LXC, Virtuozzo, Xen, Mesos, Singularity, Marathon, Mesos, Serverless, Lambda
+          - details: Apache, Nginx, PowerDNS, BIND, Postfix, Sendmail, amavisd, tcpdump, Nmap, Nagios, Cacti, Asterisk, Opensips, Splunk, Kibana
+          - details: Istio, Kubeflow, Cloudflare, Logstash, fluentd
+          - details: Ruby, Python, Perl, Go, BASH, Nodejs
+          - details: MySQL, PostgreSQL, Redis, Memcached, RabbitMQ, Kafka, Heka, Elasticsearch, RDS
+          - details: Cloudwatch, SQS, Kinesis, DyanmoDB, EKS
+  education:
+    enable: false
+    list:
+      - degree: MSc in Computer Science
+        university: University College London
+        dates: 2010 - 2011
+      - degree: BSc Maths and Physics
+        university: Imperial College London
+        dates: 2007 - 2010
+  awards:
+    enable: true
+    list:
+      - name: Spireon Hackathon 2021
+        body: Machine learning automation
+        date: '2021'
+  languages:
+    enable: true
+    list:
+      - name: English
+        level: Native
+  interests:
+    enable: true
+    list:
+      - name: Photography
+      - name: Making
+  summary:
+    enable: true
+    text: >-
+      A driven technology leader with a proven track record of architecting private clouds and infrastructures that scale,
+      focused on creating well-designed systems and fostering the growth of teams that make a difference.
+  experience:
+    enable: true
+    list:
+      - title: Principal DevOps Engineer
+        dates: July 2019 - Present (2 years 11 months)
+        company: Spireon
+        details: >-
+          Primary Functions: Coaching and developing skills in DevOps team members and Developers. Creating bridges of
+          communication between teams. Leading technical vision. Architecting solutions and creating solution designs,
+          driving projects for cross-functional systems. Heavy focus on streaming architecture CQRS/ES.
+      - title: Senior DevOps Engineer
+        dates: Sep 2017 - Jul 2019 (1 yrs 11 mos)
+        company: Spireon
+        details: >-
+          Primary Functions: CI / CD. Incident Management, creating and implementing monitoring tooling. Enhancing
+          configuration management tooling Chef/Ansible for automation. Develop containerization standards and create
+          and execute migration plan from ec2 to Docker/Kubernetes.
+      - title: Senior Systems Engineer
+        dates: Jun 2016 - Sep 2017 (1 yrs 4 mos)
+        company: Nitro Inc.
+        details: >-
+          Primary Functions: Cloud engineering, CI / CD. Automating all things, creating monitoring and performance
+          measuring tools, and using a wide range of configuration management tools and custom tools. Building and
+          automating the deployment of internal services and externally facing cloud products. Utilizing Docker, Ansible,
+          Jenkins, Github, Mesos, Kafka, and AWS to ensure the engineering team can move fast.
+      - title: Systems Engineer
+        dates: Jun 2016 - Sep 2017 (1 yrs 4 mos)
+        company: Nitro Inc.
+        details: >-
+          Primary Functions: Cloud engineering, CI / CD. Automating all things.
+      - title: Systems Engineer
+        dates: Nov 2011 - Jun 2014 (2 yrs 8 mos)
+        company: Agiloft
+        details: >-
+          Primary Functions: Project management, systems engineer, and administrator. Built and maintained clustered fault-tolerant systems using a
+          mixed virtualization environment. Designed high-performance fault-tolerant backend storage systems running DRBD and heartbeat. Managed
+          Amazon web services for disaster recovery and scalability. Managed all aspects of company infrastructure. Provided consult to company
+          clientele engineers. Authored and architected documentation and processes for systems.
+      - title: Owner/Founder
+        dates: Mar 2009 - Dec 2012 · 3 yrs 10 mos
+        company: Icyshout
+        details: >-
+          Primary Functions: Designed and built from the ground up a streaming radio company that branched out into web hosting, email hosting and virtualized servers. Built cloud platform on top of Parallels Virtuozzo and then migrated to Citrix XenServer.
+      - title: Systems Engineer
+        dates: Oct 2009 - Nov 2011 · 2 yrs 2 mos
+        company: Data102
+        details: >-
+          Primary Functions: Designed and built from the ground up a streaming radio company that branched out into web hosting, email hosting and virtualized servers. Built cloud platform on top of Parallels Virtuozzo and then migrated to Citrix XenServer.
+      # - title: System Administrator / Civil Designer
+      #   dates: Dec 2007 - Feb 2009 · 1 yr 3 mos
+      #   company: T-Bone Construction
+      #   details: >-
+      #     Primary Functions: Project management, Civil engineering, design of commercial land developments. Including all major functions of previous employer, listed below.
+      # - title: System Administrator / Senior CAD Tech.
+      #   dates: Jan 2003 - Dec 2007 · 5 yrs
+      #   company: Hacker Engineering Inc.
+      #   details: >-
+      #     Primary Functions: Spearhead all aspects of system administration and related functions to include security, data safety and integrity, disaster recovery, and development and implementation of bulk data import/export procedures. Establish and maintain IT policies and procedures. Manage user and email administration, software installation, updates and configuration, troubleshooting, backup, maintenance and analysis. Design, develop, and deploy automated information systems while ensuring connectivity, accessibility, and end user satisfaction levels. Facilitate end user training on new software/hardware. Interface effectively with software vendors to discuss and determine IT direction for company. 
+  projects:
+    enable: false
+    list:
+      - title: Project Lorem Ipsum
+        meta: Open Source
+        tagline: >-
+          You can use this section for your side projects. Lorem ipsum dolor sit
+          amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+          Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
+          montes, nascetur ridiculus mus.
+      - title: Project Sed Fringilla
+        meta: Open Source
+        tagline: >-
+          You can use this section for your side projects. Cras dapibus. Vivamus
+          elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo
+          ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+      - title: Project Praesent
+        meta: Open Source
+        tagline: >-
+          You can use this section for your side projects. Cras dapibus. Vivamus
+          elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo
+          ligula, porttitor eu, consequat vitae, eleifend ac, enim.
+  information:
+    enable: false
+    list:
+      - title: Papers
+        items:
+          - details: 2018 · Lorem Ipsum
+          - details: 2016 · Sed Fringilla
+      - title: Interests
+        details: 'Climbing, Snowboarding, Photography, Travelling'
+  social:
+    enable: true
+    list:
+      - icon: fab fa-github-square
+        url: //github.com/benoahriz
+        title: benoahriz
+      - icon: fab fa-linkedin
+        url: //linkedin.com/in/benjaminrizkowsky
+        title: benjaminrizkowsky
+      - icon: fab fa-twitter-square
+        url: //twitter.com/benoahriz
+        title: '@benoahriz'

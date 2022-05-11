@@ -1,3 +1,6 @@
 [submodule "quickstart/themes/hugo-theme-cleanwhite"]
 	path = quickstart/themes/hugo-theme-cleanwhite
 	url = https://github.com/zhaohuabing/hugo-theme-cleanwhite.git
+[submodule "themes/hugo-devresume-theme"]
+	path = themes/hugo-devresume-theme
+	url = https://github.com/cowboysmall-tools/hugo-devresume-theme.git
