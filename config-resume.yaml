@@ -1,6 +1,6 @@
 baseURL: 'https://brainvault.xyz/resume'
 # set it like below for local testing
-# baseURL: 'https://brainvaul.xyz/'
+# baseURL: 'https://brainvault.xyz/'
 languageCode: en
 title: 'Benjamin Rizkowsky Resume'
 theme: hugo-devresume-theme
