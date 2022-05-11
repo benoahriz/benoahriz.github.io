@@ -1,4 +1,4 @@
-baseURL: 'https://brainvaul.xyz/resume'
+baseURL: 'https://brainvault.xyz/resume'
 # set it like below for local testing
 # baseURL: 'https://brainvaul.xyz/'
 languageCode: en
